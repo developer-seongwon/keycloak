@@ -1,0 +1,17 @@
+server:
+  port: 11010
+
+spring:
+  application:
+    name: backend
+
+keycloak:
+  uri: http://localhost:11011
+  realm: master
+  client-id: admin-cli
+  username: admin
+  password: admin
+
+
+
+
