@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.sw.keycloak.global.exception.client.NotFoundException
+import org.sw.keycloak.user.UnauthorizedException
 import java.net.URI
 
 @RestControllerAdvice
@@ -29,5 +30,21 @@ class GlobalExceptionHandler {
                 .header("Content-Type", "application/problem+json")
                 .body(it) }
             .also { logger.info("{}", it) }
+    }
+
+    @ExceptionHandler(UnauthorizedException::class)
+    fun handleUnauthorizedException(servlet: HttpServletRequest, exception: UnauthorizedException): ResponseEntity<ProblemDetail> {
+        return ProblemDetail.forStatusAndDetail(org.springframework.http.HttpStatus.UNAUTHORIZED, exception.message ?: "Unauthorized")
+            .also {
+                it.type = URI.create("about:blank")
+                it.title = "Unauthorized"
+                it.instance = servlet.requestURI?.let(URI::create)
+            }
+            .let {
+                ResponseEntity.status(it.status)
+                    .header("Content-Type", "application/problem+json")
+                    .body(it)
+            }
+            .also { logger.warn("Unauthorized access: {}", exception.message) }
     }
 }

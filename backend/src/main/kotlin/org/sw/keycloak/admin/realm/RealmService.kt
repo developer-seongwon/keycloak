@@ -1,9 +1,5 @@
 package org.sw.keycloak.admin.realm
 
-import org.keycloak.admin.client.Keycloak
-import org.keycloak.admin.client.resource.RealmResource
-import org.keycloak.admin.client.resource.RealmsResource
-import org.keycloak.representations.AccessTokenResponse
 import org.keycloak.representations.idm.RealmRepresentation
 import org.springframework.core.io.ResourceLoader
 import org.springframework.stereotype.Service
@@ -27,4 +23,7 @@ class RealmService(
         return super.config.builder()
             .realms().findAll()
     }
+
+
+
 }

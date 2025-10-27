@@ -12,6 +12,14 @@ keycloak:
   username: admin
   password: admin
 
+# 사용자 인증 관련 설정
+auth:
+  default-realm: {} #TODO: 기본 realm 설정 (예: service)
+  default-client-id: {} #TODO: 기본 client-id 설정 (예: my-app-client)
+  client-secret: {} #TODO: client secret 설정 (Public Client면 비워두세요)
+  redirect-uri: {} #TODO: 콜백 URI 설정 (예: http://localhost:11010/api/auth/callback)
+  logout-redirect-uri: {} #TODO: 로그아웃 후 리다이렉트 URI (예: http://localhost:3000)
+
 
 
 
