@@ -1,0 +1,28 @@
+server:
+  port: 11009
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: TRACE
+
+spring:
+  application:
+    name: example
+  security:
+    oauth2:
+      client:
+        registration:
+          heviton:
+            client-id: heviton
+            client-secret: 4x1tVlNbz5WpUOT2LW1pKp6y0NJ0uMFj
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            authorization-grant-type: authorization_code  # 명시적 추가
+            scope:
+              - openid
+              - profile
+              - email
+        provider:
+          heviton:
+            issuer-uri: http://localhost:11011/realms/service
+            user-name-attribute: preferred_username
